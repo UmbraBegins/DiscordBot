@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.List;
 
 import com.jagrosh.jdautilities.command.Command;
@@ -15,22 +16,28 @@ public class setRoleCommand extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
-		// EVENTUALLY TO MAKE EMEBEDS IN THE FEEDBACK MSG's
 		List<Member> members = event.getMessage().getMentionedMembers();
 		List<Role> roles = event.getMessage().getMentionedRoles();
 		if (members.size() > 1 || roles.size() > 1) {
-			event.reply("You can't have more than one role or member!");
+			SuccessAndFailEmbed embed = new SuccessAndFailEmbed(Color.RED,
+					"You can't have more than one role or member!", "Failed to add role!");
+			event.reply(embed.embedBuild());
 		} else if (members.size() == 0 || roles.size() == 0) {
-			event.reply("You need to provide a role and/or a member!");
+			SuccessAndFailEmbed embed = new SuccessAndFailEmbed(Color.RED, "You need to have 1 role and member!",
+					"Failed to add role!");
+			event.reply(embed.embedBuild());
 		}
 
 		else if (members.get(0).getRoles().contains(roles.get(0))) {
-			event.reply(members.get(0).getAsMention() + " already has that role!");
+			SuccessAndFailEmbed embed = new SuccessAndFailEmbed(Color.RED,
+					members.get(0).getAsMention() + " already has that role!", "Failed to add role!");
+			event.reply(embed.embedBuild());
 		} else {
 			event.getGuild().addRoleToMember(members.get(0), roles.get(0)).complete();
-			event.reply("Successfully added role to " + members.get(0).getAsMention());
+			SuccessAndFailEmbed embed = new SuccessAndFailEmbed(Color.GREEN,
+					"Successfully added role to" + members.get(0).getAsMention(), "Successfully added role!");
+			event.reply(embed.embedBuild());
 		}
-
 	}
 
 }
