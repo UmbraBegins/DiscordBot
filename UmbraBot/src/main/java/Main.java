@@ -3,6 +3,10 @@ import javax.security.auth.login.LoginException;
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 
+import Commands.ClearCommand;
+import Commands.HelloCommand;
+import Commands.removeRoleCommand;
+import Commands.setRoleCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -17,6 +21,7 @@ public class Main {
 		client.addCommand(new HelloCommand());
 		client.addCommand(new setRoleCommand());
 		client.addCommand(new ClearCommand());
+		client.addCommand(new removeRoleCommand());
 		jda.addEventListener(client);
 
 	}

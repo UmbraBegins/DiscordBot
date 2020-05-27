@@ -1,7 +1,7 @@
+package Commands;
+
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class HelloCommand extends Command {
 
