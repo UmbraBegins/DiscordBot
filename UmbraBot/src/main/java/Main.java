@@ -5,6 +5,7 @@ import com.jagrosh.jdautilities.command.CommandClientBuilder;
 
 import Commands.ClearCommand;
 import Commands.HelloCommand;
+import Commands.WeatherCommand;
 import Commands.removeRoleCommand;
 import Commands.setRoleCommand;
 import net.dv8tion.jda.api.JDA;
@@ -22,6 +23,7 @@ public class Main {
 		client.addCommand(new setRoleCommand());
 		client.addCommand(new ClearCommand());
 		client.addCommand(new removeRoleCommand());
+		client.addCommand(new WeatherCommand());
 		jda.addEventListener(client);
 
 	}

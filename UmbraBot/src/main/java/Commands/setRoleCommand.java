@@ -42,5 +42,4 @@ public class setRoleCommand extends Command {
 			event.reply(embed.embedBuild());
 		}
 	}
-
 }
