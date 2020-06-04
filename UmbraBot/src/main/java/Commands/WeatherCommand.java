@@ -22,17 +22,24 @@ public class WeatherCommand extends Command {
 		if (msg.length == 1 || msg.length > 2) {
 			SuccessAndFailEmbed embed = new SuccessAndFailEmbed(Color.RED,
 					"Too many argumnets! Try !weather {city/zip}", "Failed Check Weather!");
+			event.reply(embed.embedBuild());
 			return;
 		}
-		WeatherHand.loadWebsite(msg[1]);
+		WeatherHand weather = new WeatherHand();
+		if (weather.loadWebsite(msg[1]).equalsIgnoreCase("Failed")) {
+			SuccessAndFailEmbed embed = new SuccessAndFailEmbed(Color.RED, "Invalid location! Try !weather {city/zip}",
+					"Failed Check Weather!");
+			event.reply(embed.embedBuild());
+			return;
+		}
 		EmbedBuilder embed = new EmbedBuilder();
-		embed.setTitle("Weather report for " + WeatherHand.getLocName() + ", " + WeatherHand.getCountry());
-		embed.setThumbnail("https://openweathermap.org/img/w/" + WeatherHand.getIcon() + ".png");
+		embed.setTitle("Weather report for " + weather.getLocName() + ", " + weather.getCountry());
+		embed.setThumbnail("https://openweathermap.org/img/w/" + weather.getIcon() + ".png");
 		embed.setColor(Color.CYAN);
-		embed.addField("Country", ":flag_" + WeatherHand.getCountry().toLowerCase() + ":", true);
-		embed.addField("Temperature", String.format("%.2f", WeatherHand.getCurrTempFar()) + "°F " + "| "
-				+ String.format("%.2f", WeatherHand.getCurrTempCel()) + "°C", true);
-		embed.addField("Humidity", WeatherHand.getHumi() + "%", true);
+		embed.addField("Country", ":flag_" + weather.getCountry().toLowerCase() + ":", true);
+		embed.addField("Temperature", String.format("%.2f", weather.getCurrTempFar()) + "°F " + "| "
+				+ String.format("%.2f", weather.getCurrTempCel()) + "°C", true);
+		embed.addField("Humidity", weather.getHumi() + "%", true);
 		embed.setFooter("Request was made by " + event.getMember().getUser().getAsTag(),
 				event.getMember().getUser().getAvatarUrl());
 		event.reply(embed.build());
