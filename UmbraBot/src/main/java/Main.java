@@ -4,6 +4,7 @@ import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 
 import Commands.ClearCommand;
+import Commands.GifCommand;
 import Commands.HelloCommand;
 import Commands.WeatherCommand;
 import Commands.removeRoleCommand;
@@ -24,6 +25,7 @@ public class Main {
 		client.addCommand(new ClearCommand());
 		client.addCommand(new removeRoleCommand());
 		client.addCommand(new WeatherCommand());
+		client.addCommand(new GifCommand());
 		jda.addEventListener(client);
 
 	}

@@ -3,6 +3,9 @@ package Commands;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
+import GiphyHandling.GiphyHand;
+import net.dv8tion.jda.api.EmbedBuilder;
+
 public class HelloCommand extends Command {
 
 	public HelloCommand() {
@@ -14,7 +17,9 @@ public class HelloCommand extends Command {
 
 	@Override
 	protected void execute(CommandEvent event) {
-		event.getChannel().sendMessage("Hello!").queue();
+		GiphyHand gifs = new GiphyHand();
+		EmbedBuilder embed = new EmbedBuilder();
+		embed.setImage(gifs.getURL("sex"));
+		event.reply(embed.build());
 	}
-
 }
